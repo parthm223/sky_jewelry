@@ -21,4 +21,5 @@ abstract class AppRoutes {
   static const termsConditions = '/terms-conditions';
   static const addresses = '/addresses';
   static const paymentMethods = '/payment-methods';
+  static const otpVerification = '/otp-verification';
 }

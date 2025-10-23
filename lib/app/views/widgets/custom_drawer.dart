@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:sky_jewelry/app/core/app_theme.dart';
 import 'package:sky_jewelry/app/core/responsive_utils.dart';
-
 import '../../controllers/auth_controller.dart';
 import '../../routes/app_routes.dart';
 
@@ -29,11 +28,12 @@ class CustomDrawer extends StatelessWidget {
         child: Column(
           children: [
             Container(
+              width: double.infinity,
               height: context.cardHeight(
-                mobile: 200,
-                tablet: 220,
-                desktop: 250,
-              ), // Responsive header height
+                mobile: 200, // Increased from 200
+                tablet: 230, // Increased from 220
+                desktop: 280, // Increased from 250
+              ),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
@@ -44,7 +44,7 @@ class CustomDrawer extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(
                     context.borderRadius(mobile: 20, tablet: 24, desktop: 28),
-                  ), // Responsive border radius
+                  ),
                 ),
                 boxShadow: [
                   BoxShadow(
@@ -57,115 +57,123 @@ class CustomDrawer extends StatelessWidget {
               ),
               child: SafeArea(
                 child: Padding(
-                  padding: context.responsivePadding, // Responsive padding
+                  padding: context.responsivePadding,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: context.spacing()), // Responsive spacing
+                      // Reduced spacing
+                      SizedBox(
+                        height: context.spacing(
+                          mobile: 8,
+                          tablet: 10,
+                          desktop: 12,
+                        ),
+                      ),
                       Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
                             color: AppTheme.pureWhite.withOpacity(0.8),
-                            width: 3,
+                            width: 2, // Reduced from 3
                           ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.2),
-                              blurRadius: 10,
-                              spreadRadius: 2,
+                              blurRadius: 8, // Reduced from 10
+                              spreadRadius: 1, // Reduced from 2
                             ),
                           ],
                         ),
                         child: CircleAvatar(
                           radius: context.iconSize(
-                            mobile: 30,
-                            tablet: 35,
-                            desktop: 40,
-                          ), // Responsive avatar size
+                            mobile: 28, // Reduced from 30
+                            tablet: 32, // Reduced from 35
+                            desktop: 36, // Reduced from 40
+                          ),
                           backgroundColor: AppTheme.pureWhite,
                           child: Icon(
                             Icons.person,
                             size: context.iconSize(
-                              mobile: 35,
-                              tablet: 40,
-                              desktop: 45,
-                            ), // Responsive icon size
+                              mobile: 32, // Reduced from 35
+                              tablet: 36, // Reduced from 40
+                              desktop: 40, // Reduced from 45
+                            ),
                             color: AppTheme.primaryGold,
                           ),
                         ),
                       ).animate().scale(delay: 200.ms, duration: 600.ms),
                       SizedBox(
                         height: context.spacing(
-                          mobile: 16,
-                          tablet: 20,
-                          desktop: 24,
+                          mobile: 12, // Reduced from 16
+                          tablet: 16, // Reduced from 20
+                          desktop: 20, // Reduced from 24
                         ),
-                      ), // Responsive spacing
+                      ),
                       Obx(
                         () => Text(
-                          authController.isLoggedIn
-                              ? authController.userName.isNotEmpty
-                                    ? authController.userName
-                                    : 'User'
+                          authController.isLoggedIn.value
+                              ? (authController.name.value.isNotEmpty
+                                    ? authController.name.value
+                                    : 'User')
                               : 'Guest User',
                           style: Theme.of(context).textTheme.headlineSmall
                               ?.copyWith(
                                 color: AppTheme.pureWhite,
                                 fontWeight: FontWeight.bold,
                                 fontSize: context.responsiveFontSize(
-                                  mobile: 20,
-                                  tablet: 22,
-                                  desktop: 24,
-                                ), // Responsive font size
+                                  mobile: 18, // Reduced from 20
+                                  tablet: 20, // Reduced from 22
+                                  desktop: 22, // Reduced from 24
+                                ),
                               ),
                         ).animate().fadeIn(delay: 400.ms, duration: 600.ms),
                       ),
                       SizedBox(
                         height: context.spacing(
-                          mobile: 4,
-                          tablet: 6,
-                          desktop: 8,
+                          mobile: 2, // Reduced from 4
+                          tablet: 4, // Reduced from 6
+                          desktop: 6, // Reduced from 8
                         ),
-                      ), // Responsive spacing
+                      ),
                       Obx(
                         () => Text(
-                          authController.isLoggedIn
-                              ? authController.userEmail.isNotEmpty
-                                    ? authController.userEmail
-                                    : 'user@example.com'
+                          authController.isLoggedIn.value
+                              ? (authController.email.value.isNotEmpty
+                                    ? authController.email.value
+                                    : 'user@example.com')
                               : 'Login to access all features',
                           style: Theme.of(context).textTheme.bodyMedium
                               ?.copyWith(
                                 color: AppTheme.pureWhite.withOpacity(0.9),
                                 fontSize: context.responsiveFontSize(
-                                  mobile: 12,
-                                  tablet: 14,
-                                  desktop: 16,
-                                ), // Responsive font size
+                                  mobile: 11, // Reduced from 12
+                                  tablet: 13, // Reduced from 14
+                                  desktop: 15, // Reduced from 16
+                                ),
                               ),
                           overflow: TextOverflow.ellipsis,
+                          maxLines: 1, // Ensure single line
                         ).animate().fadeIn(delay: 600.ms, duration: 600.ms),
                       ),
                       SizedBox(
                         height: context.spacing(
-                          mobile: 8,
-                          tablet: 12,
-                          desktop: 16,
+                          mobile: 6, // Reduced from 8
+                          tablet: 10, // Reduced from 12
+                          desktop: 14, // Reduced from 16
                         ),
-                      ), // Responsive spacing
-                      if (authController.isLoggedIn)
+                      ),
+                      if (authController.isLoggedIn.value)
                         Container(
                           padding: EdgeInsets.symmetric(
                             horizontal: context.spacing(
-                              mobile: 8,
-                              tablet: 12,
-                              desktop: 16,
-                            ), // Responsive padding
+                              mobile: 6, // Reduced from 8
+                              tablet: 10, // Reduced from 12
+                              desktop: 14, // Reduced from 16
+                            ),
                             vertical: context.spacing(
-                              mobile: 2,
-                              tablet: 4,
-                              desktop: 6,
+                              mobile: 1, // Reduced from 2
+                              tablet: 3, // Reduced from 4
+                              desktop: 5, // Reduced from 6
                             ),
                           ),
                           decoration: BoxDecoration(
@@ -179,10 +187,10 @@ class CustomDrawer extends StatelessWidget {
                             style: TextStyle(
                               color: AppTheme.pureWhite,
                               fontSize: context.responsiveFontSize(
-                                mobile: 10,
-                                tablet: 12,
-                                desktop: 14,
-                              ), // Responsive font size
+                                mobile: 9, // Reduced from 10
+                                tablet: 11, // Reduced from 12
+                                desktop: 13, // Reduced from 14
+                              ),
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -204,7 +212,7 @@ class CustomDrawer extends StatelessWidget {
                     ), // Responsive padding
                     horizontal: context.spacing(),
                   ),
-                  children: authController.isLoggedIn
+                  children: authController.isLoggedIn.value
                       ? _buildLoggedInMenu(context) // Pass context
                       : _buildGuestMenu(context), // Pass context
                 ),
@@ -220,7 +228,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
               child: Obx(
-                () => authController.isLoggedIn
+                () => authController.isLoggedIn.value
                     ? SizedBox(
                         height: context.cardHeight(
                           mobile: 45,

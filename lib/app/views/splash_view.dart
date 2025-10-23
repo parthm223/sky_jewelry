@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sky_jewelry/app/core/app_theme.dart';
 import 'package:sky_jewelry/app/routes/app_routes.dart';
 
 class SplashView extends StatefulWidget {
@@ -122,59 +121,11 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
                     transform: Matrix4.identity()
                       ..scale(_scaleAnimation.value)
                       ..rotateZ(_rotateAnimation.value * 0.08),
-                    child: Container(
-                      width: 180,
-                      height: 180,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFFFFD700), Color(0xFFF7C948)],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.amber.withOpacity(0.4),
-                            blurRadius: 30,
-                            spreadRadius: 6,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: Stack(
-                        children: [
-                          // Shimmer circle
-                          Positioned.fill(
-                            child: AnimatedBuilder(
-                              animation: _rotateController,
-                              builder: (context, child) {
-                                return Transform.rotate(
-                                  angle: _rotateAnimation.value * 6.28319,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      gradient: SweepGradient(
-                                        colors: [
-                                          Colors.white.withOpacity(0.15),
-                                          Colors.transparent,
-                                          Colors.white.withOpacity(0.1),
-                                        ],
-                                        stops: const [0.0, 0.5, 1.0],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          Center(
-                            child: Image.asset(
-                              'assets/images/splash.png',
-                              width: 200,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ],
+                    child: Center(
+                      child: Image.asset(
+                        'assets/images/splash.png',
+                        width: 200,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   );

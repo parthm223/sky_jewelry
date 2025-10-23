@@ -301,8 +301,8 @@ class ProfileView extends GetView<AuthController> {
 
               Obx(
                 () => Text(
-                  controller.userName.isNotEmpty
-                      ? controller.userName
+                  controller.name.value.isNotEmpty
+                      ? controller.name.value
                       : 'Guest User',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
@@ -321,8 +321,8 @@ class ProfileView extends GetView<AuthController> {
 
               Obx(
                 () => Text(
-                  controller.userEmail.isNotEmpty
-                      ? controller.userEmail
+                  controller.email.value.isNotEmpty
+                      ? controller.email.value
                       : 'guest@example.com',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: AppTheme.mediumGrey,

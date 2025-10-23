@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sky_jewelry/app/views/addresses_view.dart';
+import 'package:sky_jewelry/app/views/auth/otp_verification.dart';
 import 'package:sky_jewelry/app/views/cart_view.dart';
 import 'package:sky_jewelry/app/views/categories_view.dart';
 import 'package:sky_jewelry/app/views/checkout_view.dart';
@@ -86,5 +87,6 @@ class AppPages {
       name: AppRoutes.termsConditions,
       page: () => const TermsConditionsView(),
     ),
+    GetPage(name: '/otp-verification', page: () => OTPVerificationView()),
   ];
 }

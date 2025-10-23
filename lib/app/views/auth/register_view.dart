@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:sky_jewelry/app/core/app_theme.dart';
-
 import '../../controllers/auth_controller.dart';
 
 class RegisterView extends GetView<AuthController> {
@@ -13,7 +12,7 @@ class RegisterView extends GetView<AuthController> {
     final nameController = TextEditingController();
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
-    final confirmPasswordController = TextEditingController();
+    // final confirmPasswordController = TextEditingController();
     final formKey = GlobalKey<FormState>();
 
     return Scaffold(
@@ -131,35 +130,34 @@ class RegisterView extends GetView<AuthController> {
                 const SizedBox(height: 20),
 
                 // Confirm Password Field
-                TextFormField(
-                      controller: confirmPasswordController,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Confirm Password',
-                        prefixIcon: Icon(Icons.lock_outline),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please confirm your password';
-                        }
-                        if (value != passwordController.text) {
-                          return 'Passwords do not match';
-                        }
-                        return null;
-                      },
-                    )
-                    .animate()
-                    .fadeIn(delay: 1000.ms, duration: 600.ms)
-                    .slideX(begin: -0.3, end: 0),
-
+                // TextFormField(
+                //       controller: confirmPasswordController,
+                //       obscureText: true,
+                //       decoration: const InputDecoration(
+                //         labelText: 'Confirm Password',
+                //         prefixIcon: Icon(Icons.lock_outline),
+                //       ),
+                //       validator: (value) {
+                //         if (value == null || value.isEmpty) {
+                //           return 'Please confirm your password';
+                //         }
+                //         if (value != passwordController.text) {
+                //           return 'Passwords do not match';
+                //         }
+                //         return null;
+                //       },
+                //     )
+                //     .animate()
+                //     .fadeIn(delay: 1000.ms, duration: 600.ms)
+                //     .slideX(begin: -0.3, end: 0),
                 const SizedBox(height: 40),
 
-                // Register Button
+                // Register Button - Now sends OTP first
                 Obx(
                       () => SizedBox(
                         height: 56,
                         child: ElevatedButton(
-                          onPressed: controller.isLoading
+                          onPressed: controller.isLoading.value
                               ? null
                               : () {
                                   if (formKey.currentState!.validate()) {
@@ -170,7 +168,7 @@ class RegisterView extends GetView<AuthController> {
                                     );
                                   }
                                 },
-                          child: controller.isLoading
+                          child: controller.isLoading.value
                               ? const CircularProgressIndicator(
                                   valueColor: AlwaysStoppedAnimation<Color>(
                                     AppTheme.premiumBlack,
